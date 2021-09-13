@@ -1,0 +1,29 @@
+<div class="cart" *ngIf="selectedProducts; else empty">
+    <ng-template *ngFor="let selectedProduct of selectedProducts; trackBy: trackByItems">
+        <div>
+            <div>
+                <img/><span>CART</span>
+            </div>
+            <div>
+                <img/><span>Empty the trash</span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <span>Amount:</span><span>pc.</span>
+            </div>
+            <div>
+                <span>Total:</span><span>руб.</span>
+            </div>
+            <div>
+                <button>&lt; Return to products</button>
+                <button>Order</button>
+            </div>
+        </div>
+    </ng-template>
+</div>
+
+<ng-template #empty>
+    <h2>Empty cart</h2>
+    <p>Most likely you haven't ordered pizza yet. To order pizza, go to the main page.</p>
+</ng-template>
