@@ -1,4 +1,5 @@
 <div class="cart" *ngIf="selectedProducts; else empty">
+<!-- можно, но обычно для этих целей используется ng-container -->
     <ng-template *ngFor="let selectedProduct of selectedProducts; trackBy: trackByItems">
         <div>
             <div>
