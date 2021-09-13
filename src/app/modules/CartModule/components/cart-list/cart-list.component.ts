@@ -11,6 +11,7 @@ export class CartListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log();
   }
 
   trackByItems(index: number, selectedProduct: ProductModel) {

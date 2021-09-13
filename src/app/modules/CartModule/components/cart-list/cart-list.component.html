@@ -1,5 +1,5 @@
 <div class="cart" *ngIf="selectedProducts; else empty">
-    <ng-template *ngFor="let selectedProduct of selectedProducts; trackBy: trackByItems">
+    <ng-container *ngFor="let selectedProduct of selectedProducts; trackBy: trackByItems">
         <div>
             <div>
                 <img/><span>CART</span>
@@ -20,7 +20,7 @@
                 <button>Order</button>
             </div>
         </div>
-    </ng-template>
+    </ng-container>
 </div>
 
 <ng-template #empty>

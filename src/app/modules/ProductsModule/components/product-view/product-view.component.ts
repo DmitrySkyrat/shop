@@ -16,7 +16,7 @@ export class ProductViewComponent implements OnInit {
     console.log('hello');
   }
 
-  buy() {
+  buy(): void {
     console.log('buy');
   }
 }
