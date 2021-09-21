@@ -1,17 +1,22 @@
 <div class="product-view">
-    <img class="product-img"/>
-    <p class="product__title">Сырный цыпленок</p>
-    <div class="product__description">
-        <button>thin</button>
-        <button>traditional</button>
+    <img class="product-img" width="260" height="260" src="{{card.imgUrl}}"/>
+    <p class="product-view__title">{{card.name}}</p>
+    <div class="product-view__params">
+        <div class="product-view__description" (click)="selectProductCategory($event)">
+            <input type="button" value="{{card.category.thin}}" />
+            <input type="button" value="{{card.category.traditional}}" />
+            <input type="button" value="{{card.category.cheeseBoard}}" />
+        </div>
+        <div class="product-view__size" (click)="selectProductSize($event)">
+            <input type="button" value="{{card.size.small}}" />
+            <input type="button" value="{{card.size.medium}}" />
+            <input type="button" value="{{card.size.big}}" />
+        </div>
     </div>
-    <div class="product__size">
-        <button>28 cm</button>
-        <button>30 cm</button>
-        <button>40 cm</button>
-    </div>
-    <div class="product__options">
-        <span>от 385 ₽</span>
-        <button (click)="buy()">+ Add to cart</button>
+    <div class="product-view__options">
+        <p>{{card.price}} BYN</p>
+        <button (click)="onAdd(card)" [disabled]="!card.isAvaliable">
+            + Add to cart <span *ngIf="this.cardCount">{{this.cardCount}}</span>
+        </button>
     </div>
 </div>

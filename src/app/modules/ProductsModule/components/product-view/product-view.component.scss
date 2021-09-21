@@ -1,0 +1,112 @@
+.product-view {
+    width: 280px;
+
+    .product-img {
+        margin: 0 auto;
+        display: block;
+    }
+
+    button, input {
+        cursor: pointer;
+        border: none;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        letter-spacing: 0.015em;
+        color: #2C2C2C;
+        background: #FFFFFF;
+    }
+
+    &__params {
+        height: 85px;
+        margin-top: 22px;
+        padding: 7px;
+        background: #F3F3F3;
+        border: 1px solid #F3F3F3;
+        border-radius: 10px;
+
+        input {
+            border-radius: 5px;
+            flex-grow: 1;
+            height: 32px;
+        }
+
+        input:not(:first-child) {
+            margin-left: 3px;
+        }
+    }
+
+    &__description {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__size {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 7px;
+    }
+
+    &__title {
+        margin-top: 11px;
+        text-align: center;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        letter-spacing: 0.01em;
+        color: #000000;
+    }
+
+    &__options {
+        display: flex;
+        margin-top: 17px;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 22px;
+            line-height: 27px;
+            letter-spacing: 0.015em;
+            color: #000000;
+        }
+
+        button {
+            height: 40px;
+            width: 132px;
+            border: 1px solid #EB5A1E;
+            color: #EB5A1E;
+            background: #FFFFFF;
+            border-radius: 30px;
+
+            &:disabled {
+                color: #adadad;;
+                border-color:#adadad;
+
+                span {
+                    color: #adadad;;
+                    border-color:#adadad;
+                    background: #FFFFFF;
+                }
+            }
+
+            span {
+                height: 22px;
+                width: 22px;
+                display: inline-block;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 13px;
+                line-height: 22px;
+                border: 1px solid #EB5A1E;
+                border-radius: 11px;
+                color: #FFFFFF;
+                background: #EB5A1E;
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
   .example-container {
     height: 600px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    background: #FFFFFF;
   }
   
   .example-sidenav-content {
@@ -11,4 +11,9 @@
   
   .example-sidenav {
     padding: 20px;
+  }
+  
+  .products {
+    display: flex;
+    flex-wrap: wrap;
   }

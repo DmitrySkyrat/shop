@@ -1,0 +1,18 @@
+<div class="item">
+    <div class="item__description">
+        <img class="item-img" width="80" height="80" src="{{product.imgUrl}}"/>
+        <div class="item-info">
+            <p class="item__name">{{product.name}}</p>
+            <p class="item__category">{{product.category}}, {{product.size}} cm.</p>
+        </div>
+    </div>
+    <div class="item__count">
+        <button (click)="decreaseCount(product)">-</button>
+        <span>{{product.count}}</span>
+        <button (click)="increaseCount(product)">+</button>
+    </div>
+    <span>{{product.price}} BYN</span>
+    <button class="item__delete" (click)="onDelete(product)">
+        <img src="assets/delete.svg"/>
+    </button>
+</div>

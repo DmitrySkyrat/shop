@@ -1,0 +1,21 @@
+<div class="header">
+    <div class="header__title-block">
+        <img height="36" width="36" class="header__logo" src="assets/logo.png"/>
+        <div class="header__title">
+            <p #appTitle class="header__title-pizza"></p>
+            <p class="header__title-biggest">The biggest pizza in the world!</p>
+        </div>
+    </div>
+    <div class="header__cart">
+        <div>
+            <span>0 BYN</span>
+        </div>
+        <span class="divider"> | </span>
+        <div>
+            <a [routerLink]="['/cart']">
+                <img src="assets/header-cart.svg" />
+            </a>
+            <span></span>
+        </div>
+    </div>
+</div>
