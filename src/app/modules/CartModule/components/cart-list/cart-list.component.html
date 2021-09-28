@@ -1,26 +1,37 @@
-<div class="cart" *ngIf="selectedProducts; else empty">
-    <ng-container *ngFor="let selectedProduct of selectedProducts; trackBy: trackByItems">
-        <div>
-            <div>
-                <img/><span>CART</span>
+<div class="cart">
+    <div class="cart-nav">
+        <div class="cart-nav__title">
+            <img width="29" height="29" src="assets/cart.svg"/><span>Cart</span>
+        </div>
+        <div class="cart-nav__clear" (click)="onCleanProducts()">
+            <img width="20" height="20" src="assets/small-cart.svg"/><span>Empty the trash</span>
+        </div>
+    </div>
+
+    <div class="cart-items" *ngIf="selectedProducts; else empty">
+        <ng-container *ngFor="let selectedProduct of selectedProducts; trackBy: trackByItems">
+            <app-cart-item
+             [product]="selectedProduct"
+             (delete)="onDelete($event)"
+             (setCountToProduct)="setCountToProduct($event)">
+            </app-cart-item>
+        </ng-container>
+    </div>
+
+    <div class="cart-order">
+        <div class="cart-order__result">
+            <div class="cart-order__amount">
+                <span>Amount:</span><span> {{this.rezultProductsCount}} pc.</span>
             </div>
-            <div>
-                <img/><span>Empty the trash</span>
+            <div class="cart-order__total">
+                <span>Total:</span><span> {{this.rezultProductsSum}} BYN</span>
             </div>
         </div>
-        <div>
-            <div>
-                <span>Amount:</span><span>pc.</span>
-            </div>
-            <div>
-                <span>Total:</span><span>руб.</span>
-            </div>
-            <div>
-                <button>&lt; Return to products</button>
-                <button>Order</button>
-            </div>
+        <div class="cart-order__buttons">
+            <button class="return-btn">&lt; Return to products</button>
+            <button class="order-btn" (click)="order()">Order</button>
         </div>
-    </ng-container>
+    </div>
 </div>
 
 <ng-template #empty>

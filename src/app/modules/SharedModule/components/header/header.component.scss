@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 133px;
+    padding-top: 42px;
+    padding-left: 67px;
+    padding-right: 67px;
+    border-bottom: 1px solid #F7F7F7;
+    
+    &__title-block {
+        display: flex;
+    }
+
+    &__title {
+        margin-left: 10px;
+    }
+
+    &__title-pizza {
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    &__title-biggest {
+        color: #7B7B7B;
+    }
+
+    &__cart {
+        height: 50px;
+        width: 150px;
+        display: flex;
+        background: #FE5F1E;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+    }
+}
