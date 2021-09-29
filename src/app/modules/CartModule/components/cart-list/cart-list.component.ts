@@ -40,7 +40,7 @@ export class CartListComponent implements OnInit {
   }
 
   onCleanProducts() {
-    this.cartService.deleteProducts();
+    this.cartService.removeAllProducts();
     this.selectedProducts = this.cartService.getCartProducts;
   }
 }
