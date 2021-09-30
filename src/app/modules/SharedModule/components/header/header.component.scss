@@ -6,6 +6,7 @@
     padding-left: 67px;
     padding-right: 67px;
     border-bottom: 1px solid #F7F7F7;
+    font-style: normal;
     
     &__title-block {
         display: flex;
@@ -24,13 +25,31 @@
         color: #7B7B7B;
     }
 
-    &__cart {
+    &__cart-info {
         height: 50px;
         width: 150px;
         display: flex;
         background: #FE5F1E;
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 19px;
         justify-content: center;
         align-items: center;
         border-radius: 30px;
+
+        .divider {
+            margin-left: 5px;
+        }
+    }
+    
+    &__cart-count {
+        margin-left: 2px;
+        display: flex;
+        align-items: center;
+
+        span {
+            margin-left: 2px;
+        }
     }
 }

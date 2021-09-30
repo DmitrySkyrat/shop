@@ -1,7 +1,30 @@
 <app-header></app-header>
+<div class="menu">
+  <div class="menu__types">
+    <button class="menu__type">all</button>
+    <button class="menu__type">meat</button>
+    <button class="menu__type">vegetarian</button>
+    <button class="menu__type">pepperoni</button>
+    <button class="menu__type">cheese</button>
+  </div>
+  <div class="menu__sort">
+    <button class="menu__sort-btn" [matMenuTriggerFor]="menu" appToggleMenu>
+      <img height="6" width="10" class="menu__sort-img" src="assets/triangle.svg"/>
+      <span class="menu__sort-by">sort by:</span>
+    </button>
+    <span class="menu__sort-option">popular</span>
+  </div>
+</div>
+
+<mat-menu class="menu-modal" #menu="matMenu">
+  <button mat-menu-item (click)="orderByKey('popular')">popular</button>
+  <button mat-menu-item (click)="orderByKey('by price')">by price</button>
+  <button mat-menu-item (click)="orderByKey('alphabetically')">alphabetically</button>
+</mat-menu>
+
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-      <p>Auto-resizing sidenav</p>
+      <p>selected products</p>
       <div *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</div>
       <button (click)="showFiller = !showFiller" color="primary" mat-raised-button>
         Toggle extra products
@@ -9,7 +32,7 @@
     </mat-drawer>
   
     <div class="example-sidenav-content">
-      <button type="button" mat-button (click)="drawer.toggle()" color="primary">
+      <button type="button" mat-button (click)="drawer.toggle()">
         Toggle cart
       </button>
     </div>

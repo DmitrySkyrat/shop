@@ -6,16 +6,16 @@
             <p class="header__title-biggest">The biggest pizza in the world!</p>
         </div>
     </div>
-    <div class="header__cart">
-        <div>
-            <span>0 BYN</span>
+    <div class="header__cart-info">
+        <div class="header__cart-sum">
+            <span>{{cartService.getProductsSum() | currency:'BYN'}}</span>
         </div>
         <span class="divider"> | </span>
-        <div>
+        <div class="header__cart-count">
             <a [routerLink]="['/cart']">
                 <img src="assets/header-cart.svg" />
             </a>
-            <span></span>
+            <span class="header__cart-sum">{{cartService.getProductsCount()}}</span>
         </div>
     </div>
 </div>
