@@ -20,3 +20,4 @@ import { MaterialModule } from './modules/MaterialModule/material.module';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+// Добавляйте все, что хотите показать в ветку master

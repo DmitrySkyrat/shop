@@ -11,9 +11,10 @@ export class CartService {
         return this._selectedProducts;
     }
 
+    // mutable approach
     addCartProduct(cartProduct: CartProductModel): void {
         console.log('cartProduct', cartProduct);
-        
+
         if (!this._selectedProducts.find((product => product.name === cartProduct.name))) {
             this._selectedProducts.push(cartProduct);
         } else {
@@ -22,10 +23,11 @@ export class CartService {
         console.log(this._selectedProducts);
     }
 
+    // immutable approach
     deleteCartProduct(cartProduct: CartProductModel): void {
         if (this._selectedProducts.length) {
             this._selectedProducts = this._selectedProducts.filter(product => product.name !== cartProduct.name)
-        }   
+        }
     }
 
     setCountToProduct(cartProduct: CartProductModel): void {
