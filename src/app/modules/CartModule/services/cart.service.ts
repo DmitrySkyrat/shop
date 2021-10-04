@@ -11,15 +11,12 @@ export class CartService {
         return this._selectedProducts;
     }
 
-    addCartProduct(cartProduct: CartProductModel): void {
-        console.log('cartProduct', cartProduct);
-        
+    addCartProduct(cartProduct: CartProductModel): void {    
         if (!this._selectedProducts.find((product => product.name === cartProduct.name))) {
             this._selectedProducts.push(cartProduct);
         } else {
             this.setCountToProduct(cartProduct);
         }
-        console.log(this._selectedProducts);
     }
 
     deleteCartProduct(cartProduct: CartProductModel): void {
@@ -36,7 +33,7 @@ export class CartService {
         })
     }
 
-    deleteProducts(): void {
+    removeAllProducts(): void {
         this._selectedProducts = [];
     }
 
@@ -46,5 +43,9 @@ export class CartService {
 
     getProductsCount(): number {
         return this._selectedProducts.reduce((acc, item) => acc + (item.count as number), 0);
+    }
+
+    isEmptyCart(): boolean {
+        return !!this._selectedProducts.length;
     }
 }

@@ -8,17 +8,13 @@ import { ProductModel } from '../../models/product.model';
   styleUrls: ['./product-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductViewComponent implements OnInit {
+export class ProductViewComponent {
   @Input() card!: ProductModel;
   selectedProductSize!: number;
   selectedProductCategory!: string;
   cardCount: number = 0;
 
   constructor(private cartService: CartService) {}
-
-  ngOnInit(): void {
-    console.log('hello');
-  }
 
   onAdd(card: ProductModel): void {
     this.cardCount++;

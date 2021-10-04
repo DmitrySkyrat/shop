@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CartService } from 'src/app/modules/CartModule/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
   @ViewChild('appTitle') title!: ElementRef;
-  constructor() {}
+  constructor(public cartService: CartService) {}
 
   ngOnInit(): void {
     ;

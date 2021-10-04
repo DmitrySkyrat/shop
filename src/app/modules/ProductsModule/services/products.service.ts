@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
 import { ECategoryType, ESizeType, ProductModel } from "../models/product.model";
 
 @Injectable({
@@ -24,7 +25,7 @@ export class ProductsService {
         }
     ]
 
-    getProducts(): ProductModel[] {
-        return this.products;
+    getProducts(): Observable<ProductModel[]> {
+        return of(this.products);
     }
 }

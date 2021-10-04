@@ -1,12 +1,81 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 67px;
+  margin: 40px 0px 32px;
+  font-style: normal;
+  letter-spacing: 0.015em;
+
+    &__types {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &__sort {
+      display: flex;
+      align-self: center;
+    }
+
+    &__type {
+      padding: 14px 17px;
+      border: 1px solid #F9F9F9;
+      background-color: #F9F9F9;
+      border-radius: 30px;
+      color: #2C2C2C;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    &__type:hover {
+      background-color: #282828;
+      color: #FFFFFF;
+    }
+
+    &__type:not(:first-child) {
+      margin-left: 9px;
+    }
+
+    &__sort-btn {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: bold;
+    }
+
+    &__sort-by {
+      margin-left: 8px;
+    }
+
+    &__sort-option {
+      margin-left: 8px;
+      font-size: 14px;
+      line-height: 17px;
+      border-bottom: 1px dotted #FE5F1E;
+      color: #FE5F1E;
+    }
+  }
+
   .example-container {
-    height: 600px;
     background: #FFFFFF;
+
+    button {
+      font-weight: bold;
+      font-size: 16px;
+      letter-spacing: 0.015em;
+      background-color: #FE5F1E;
+      color: #FFFFFF;
+    }
   }
   
   .example-sidenav-content {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 35px;
   }
   
   .example-sidenav {
@@ -15,5 +84,6 @@
   
   .products {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
   }
