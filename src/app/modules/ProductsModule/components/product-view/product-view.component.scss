@@ -1,9 +1,16 @@
 .product-view {
     width: 280px;
+    margin-top: 35px;
 
     .product-img {
         margin: 0 auto;
         display: block;
+    }
+    
+    .product-view-btn {
+        float: right;
+        color: #FE5F1E;
+        border: 1px solid;
     }
 
     button, input {

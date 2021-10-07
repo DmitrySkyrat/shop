@@ -1,12 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/modules/CartModule/services/cart.service';
+import { PizzaDescriptionData } from 'src/app/modules/CoreModule/models/config.model';
+import { pizzaDescriptions } from 'src/app/modules/CoreModule/services/constant.service';
 import { ProductModel } from '../../models/product.model';
-
 @Component({
   selector: 'app-product-view',
   templateUrl: './product-view.component.html',
   styleUrls: ['./product-view.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class ProductViewComponent {
   @Input() card!: ProductModel;
@@ -14,7 +17,12 @@ export class ProductViewComponent {
   selectedProductCategory!: string;
   cardCount: number = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
+    ) {}
 
   onAdd(card: ProductModel): void {
     this.cardCount++;
@@ -40,4 +48,23 @@ export class ProductViewComponent {
       this.selectedProductSize = +event.target.value;
     }
   }
+
+  openDialog() {
+    this.dialog.open(DialogProductViewComponent, {
+      data: pizzaDescriptions.find((item) => item.name === this.card.name)
+    });
+    const navigationExtras: NavigationExtras = {
+      queryParams: {productID: this.card.name},
+      relativeTo: this.route
+    }
+    this.router.navigate([], navigationExtras);
+  }
+}
+
+@Component({
+  selector: 'app-dialog-product-view',
+  templateUrl: './dialog-product-view.html'
+})
+export class DialogProductViewComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: PizzaDescriptionData) {}
 }

@@ -1,15 +1,23 @@
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
 import { MaterialModule } from "../MaterialModule/material.module";
 import { SharedModule } from "../SharedModule/shared.module";
+import { ProductInfoComponent } from "./components/product-info/product-info.component";
 import { ProductListComponent } from "./components/product-list/product-list.component";
-import { ProductViewComponent } from "./components/product-view/product-view.component";
+import { DialogProductViewComponent, ProductViewComponent } from "./components/product-view/product-view.component";
 import { ProductComponent } from "./components/product.component";
 import { ToggleMenuDirective } from "./directives/toggle-menu.directive";
+import { ProductsRoutingModule } from "./products-routing.module";
 
 @NgModule({
-    declarations: [ProductComponent, ProductViewComponent, ProductListComponent, ToggleMenuDirective],
-    imports: [RouterModule.forChild([{path: '', component: ProductComponent}]), MaterialModule, SharedModule],
-    exports: [RouterModule]
+    declarations: [
+        ProductComponent,
+        ProductViewComponent,
+        ProductListComponent,
+        ProductInfoComponent,
+        DialogProductViewComponent,
+        ToggleMenuDirective
+    ],
+    imports: [ProductsRoutingModule, MaterialModule, SharedModule],
+    exports: []
 })
 export class ProductsModule {}

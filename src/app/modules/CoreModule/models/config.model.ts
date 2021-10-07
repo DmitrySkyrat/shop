@@ -10,3 +10,10 @@ export interface ProjectInfoModel {
     Ver: string;
     API_URL: string;
 }
+
+export interface PizzaDescriptionData {
+    name: string;
+    extra: string;
+    nutritionalValue: string;
+    imgUrl: string;
+}

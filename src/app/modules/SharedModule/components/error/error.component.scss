@@ -1,0 +1,23 @@
+.eld-error {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    min-height: calc(100vh - 440px);
+  
+    .wrapper {
+      display: flex;
+      position: absolute;
+      align-items: center;
+      top: 50%;
+      margin-top: -22px;
+  
+      .error-icon {
+        margin-right: 10px;
+      }
+  
+      .error-message {
+        font-size: 32px;
+        font-weight: bold;
+      }
+    }
+  }
