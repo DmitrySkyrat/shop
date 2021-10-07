@@ -10,4 +10,8 @@ export class LocalStorageService {
   setToLocalStorage(key: string, value: any) {
     window.localStorage.setItem(key, value);
   }
+
+  checkAdmin(): boolean {
+    return window.localStorage.getItem('user') === 'admin';
+  }
 }

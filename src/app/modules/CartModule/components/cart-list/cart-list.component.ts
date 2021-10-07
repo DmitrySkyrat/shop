@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartProductModel } from '../../models/cart.model';
 import { CartService } from '../../services/cart.service';
 
@@ -11,7 +12,7 @@ export class CartListComponent implements OnInit {
   selectedProducts!: CartProductModel[];
   rezultProductsSum!: number;
   rezultProductsCount!: number;
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.selectedProducts = this.cartService.getCartProducts;
@@ -24,7 +25,7 @@ export class CartListComponent implements OnInit {
   }
 
   order() {
-    console.log('selectedProducts', this.selectedProducts);
+    this.router.navigate(['cart', 'order']);
   }
 
   onDelete(product: CartProductModel) {
