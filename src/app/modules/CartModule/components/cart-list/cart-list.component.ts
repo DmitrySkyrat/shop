@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { CartProductModel } from '../../models/cart.model';
 import { CartService } from '../../services/cart.service';
 
@@ -9,9 +10,9 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./cart-list.component.scss']
 })
 export class CartListComponent implements OnInit {
-  selectedProducts!: CartProductModel[];
-  rezultProductsSum!: number;
-  rezultProductsCount!: number;
+  selectedProducts: Observable<CartProductModel[]> = of([]);
+  rezultProductsSum!: Observable<number>;
+  rezultProductsCount!: Observable<number>;
   constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
@@ -36,8 +37,8 @@ export class CartListComponent implements OnInit {
   setCountToProduct(product: CartProductModel) {
     this.cartService.setCountToProduct(product);
     this.selectedProducts = this.cartService.getCartProducts;
-    this.rezultProductsSum = this.cartService.getProductsSum();
-    this.rezultProductsCount = this.cartService.getProductsCount();
+    // this.rezultProductsSum = this.cartService.getProductsSum();
+    // this.rezultProductsCount = this.cartService.getProductsCount();
   }
 
   onCleanProducts() {

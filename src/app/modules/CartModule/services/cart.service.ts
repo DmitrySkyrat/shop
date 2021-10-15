@@ -1,51 +1,64 @@
 import { Injectable } from "@angular/core";
+import { EMPTY, first, map, Observable, of, reduce } from "rxjs";
 import { CartProductModel } from "../models/cart.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CartService {
-    private _selectedProducts: CartProductModel[] = [];
+    private _selectedProducts: Observable<CartProductModel[]> = of([]);
 
-    get getCartProducts(): CartProductModel[] {
+    get getCartProducts(): Observable<CartProductModel[]> {
         return this._selectedProducts;
     }
 
-    addCartProduct(cartProduct: CartProductModel): void {    
-        if (!this._selectedProducts.find((product => product.name === cartProduct.name))) {
-            this._selectedProducts.push(cartProduct);
-        } else {
-            this.setCountToProduct(cartProduct);
-        }
+    addCartProduct(cartProduct: CartProductModel): void {
+        this._selectedProducts = this._selectedProducts.pipe(
+            map(products => {
+                if (!products.find((product => product.name === cartProduct.name))) {
+                    return products.concat(cartProduct);
+                } else {
+                    this.setCountToProduct(cartProduct);
+                    return products;
+                }
+            })
+        )
     }
 
     deleteCartProduct(cartProduct: CartProductModel): void {
-        if (this._selectedProducts.length) {
-            this._selectedProducts = this._selectedProducts.filter(product => product.name !== cartProduct.name)
-        }   
+        this._selectedProducts.pipe(
+            map(products => products.length ? products.filter(product => product.name !== cartProduct.name) : EMPTY
+            ),
+        )
     }
 
     setCountToProduct(cartProduct: CartProductModel): void {
-        this._selectedProducts.forEach(product => {
-            if (product.name === cartProduct.name) {
-                product.count = cartProduct.count;
-            }
-        })
+        this._selectedProducts.pipe(
+            map(products => products.forEach(product => {
+                if (product.name === cartProduct.name) {
+                    product.count = cartProduct.count;
+                }
+            }))
+        )
     }
 
     removeAllProducts(): void {
-        this._selectedProducts = [];
+        this._selectedProducts = this._selectedProducts.pipe(map(products => []));
     }
 
-    getProductsSum(): number {
-        return this._selectedProducts.reduce((acc, item) => acc + item.price * (item.count as number), 0);
+    getProductsSum(): Observable<number> {
+        return this._selectedProducts.pipe(
+            map(products => products.reduce((acc, item) => acc + item.price * (item.count as number), 0))
+        )
     }
 
-    getProductsCount(): number {
-        return this._selectedProducts.reduce((acc, item) => acc + (item.count as number), 0);
+    getProductsCount(): Observable<number> {
+        return this._selectedProducts.pipe(
+            map(products => products.reduce((acc, item) => acc + (item.count as number), 0))
+        )
     }
 
     isEmptyCart(): boolean {
-        return !!this._selectedProducts.length;
+        return !!this._selectedProducts.pipe(first(products => products.length > 0));
     }
 }

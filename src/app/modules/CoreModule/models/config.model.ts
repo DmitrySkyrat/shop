@@ -4,8 +4,10 @@ export interface ConfigModel {
     email: string;
     password: string;
 }
-
-export interface ProjectInfoModel {
+interface IObjectKeys {
+    [key: string]: string;
+  }
+export interface AppSettingsModel extends IObjectKeys {
     App: string;
     Ver: string;
     API_URL: string;

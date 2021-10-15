@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ProductsPromiseService } from 'src/app/modules/CoreModule/services/products-promise.service';
 import { ProductModel } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 
@@ -9,10 +9,10 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  cards$!: Observable<ProductModel[]>;
-  constructor(private productsService: ProductsService) {}
+  cards$!: Promise<ProductModel[]>;
+  constructor(private productsService: ProductsService, private products: ProductsPromiseService) {}
 
   ngOnInit(): void {
-    this.cards$ = this.productsService.getProducts();
+    this.cards$ = this.products.getProducts();
   }
 }

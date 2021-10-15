@@ -1,9 +1,4 @@
-import { InjectionToken } from '@angular/core';
-import { PizzaDescriptionData, ProjectInfoModel } from "../models/config.model";
-
-export const projectInfoInjector = new InjectionToken<ProjectInfoModel>('projectInfo');
-
-export const projectInfo = {App: "TaskManager", Ver: "1.0", API_URL: "http://localhost:4200"};
+import { PizzaDescriptionData } from "../models/config.model";
 
 export const pizzaDescriptions: PizzaDescriptionData[] = [
     { name: 'Cheeseburger Pizza', extra: 'Pepperoni, Bacon, Tomato Sauce, Tomatoes, Mozzarella cheese, Jalapeno',

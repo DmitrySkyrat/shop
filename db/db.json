@@ -1,0 +1,20 @@
+{
+    "products": [
+        {
+            "name": "Cheeseburger Pizza", "imgUrl": "assets/cheeseburgerPizza.png", "size": { "small": 26, "medium": 30, "big": 40 }, "price": 15.99,
+            "category": { "traditional": "traditional", "thin": "thin", "cheeseBoard": "cheeseBoard" }, "isAvaliable": false, "count": 0
+        },
+        {
+            "name": "Cheese", "imgUrl": "assets/cheese.png", "size": { "small": 26, "medium": 30, "big": 40 }, "price": 11,
+            "category": { "traditional": "traditional", "thin": "thin", "cheeseBoard": "cheeseBoard" }, "isAvaliable": true, "count": 0
+        },
+        {
+            "name": "Cheese Chicken", "imgUrl": "assets/cheeseChicken.png", "size": { "small": 26, "medium": 30, "big": 40 }, "price": 22,
+            "category": { "traditional": "traditional", "thin": "thin", "cheeseBoard": "cheeseBoard" }, "isAvaliable": true, "count": 0
+        },
+        {
+            "name": "Asian Shrimp", "imgUrl": "assets/asianShrimp.png", "size": { "small": 26, "medium": 30, "big": 40 }, "price": 11,
+            "category": { "traditional": "traditional", "thin": "thin", "cheeseBoard": "cheeseBoard" }, "isAvaliable": true, "count": 0
+        }
+    ]
+}
