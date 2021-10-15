@@ -5,7 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
-import { AdminModule } from './modules/Admin/admin.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TimingInterceptor } from './modules/CoreModule/interceptors/timing.interceptor';
+import { CoreModule } from './modules/CoreModule/core.module';
 
 @NgModule({
   declarations: [
@@ -14,10 +16,17 @@ import { AdminModule } from './modules/Admin/admin.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CoreModule,
+    HttpClientModule,
     AppRoutingModule,
-    AdminModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TimingInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

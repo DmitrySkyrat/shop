@@ -8,14 +8,14 @@
     </div>
     <div class="header__cart-info">
         <div class="header__cart-sum">
-            <span>{{cartService.getProductsSum() | currency:'BYN'}}</span>
+            <span>{{cartService.getProductsSum() | async | currency:'BYN'}}</span>
         </div>
         <span class="divider"> | </span>
         <div class="header__cart-count">
             <a [routerLink]="['/cart']">
                 <img src="assets/header-cart.svg" />
             </a>
-            <span class="header__cart-sum">{{cartService.getProductsCount()}}</span>
+            <span class="header__cart-sum">{{cartService.getProductsCount() | async}}</span>
         </div>
     </div>
 </div>
