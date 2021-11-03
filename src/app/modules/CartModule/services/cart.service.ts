@@ -1,64 +1,54 @@
 import { Injectable } from "@angular/core";
-import { EMPTY, first, map, Observable, of, reduce } from "rxjs";
+import { BehaviorSubject, first, map, Observable, of } from "rxjs";
 import { CartProductModel } from "../models/cart.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CartService {
-    private _selectedProducts: Observable<CartProductModel[]> = of([]);
-
-    get getCartProducts(): Observable<CartProductModel[]> {
-        return this._selectedProducts;
-    }
+     selectedProducts$ = new BehaviorSubject<CartProductModel[]>([]);
 
     addCartProduct(cartProduct: CartProductModel): void {
-        this._selectedProducts = this._selectedProducts.pipe(
-            map(products => {
-                if (!products.find((product => product.name === cartProduct.name))) {
-                    return products.concat(cartProduct);
-                } else {
-                    this.setCountToProduct(cartProduct);
-                    return products;
-                }
-            })
-        )
+        const value = this.selectedProducts$.value;
+        if (!value.find((product => product.name === cartProduct.name))) {
+            this.selectedProducts$.next([...value, cartProduct]);
+        } else {
+            this.setCountToProduct(cartProduct);
+        }
     }
 
     deleteCartProduct(cartProduct: CartProductModel): void {
-        this._selectedProducts.pipe(
-            map(products => products.length ? products.filter(product => product.name !== cartProduct.name) : EMPTY
-            ),
-        )
+        const value = this.selectedProducts$.value;
+        this.selectedProducts$.next([...value.filter(product => product.name !== cartProduct.name)]);
     }
 
     setCountToProduct(cartProduct: CartProductModel): void {
-        this._selectedProducts.pipe(
-            map(products => products.forEach(product => {
-                if (product.name === cartProduct.name) {
-                    product.count = cartProduct.count;
-                }
-            }))
-        )
+        const value = this.selectedProducts$.value;
+        value.forEach(product => {
+            if (product.name === cartProduct.name) {
+                product.count = cartProduct.count;
+            }
+        });
+        this.selectedProducts$.next([...value]);
     }
 
     removeAllProducts(): void {
-        this._selectedProducts = this._selectedProducts.pipe(map(products => []));
+        this.selectedProducts$.next([]);
     }
 
-    getProductsSum(): Observable<number> {
-        return this._selectedProducts.pipe(
+    getProductsSum(): Observable<number> {  
+        return this.selectedProducts$.pipe(
             map(products => products.reduce((acc, item) => acc + item.price * (item.count as number), 0))
         )
     }
 
     getProductsCount(): Observable<number> {
-        return this._selectedProducts.pipe(
+        return this.selectedProducts$.pipe(
             map(products => products.reduce((acc, item) => acc + (item.count as number), 0))
         )
     }
 
     isEmptyCart(): boolean {
-        return !!this._selectedProducts.pipe(first(products => products.length > 0));
+        return !!this.selectedProducts$.pipe(first(products => products.length > 0));
     }
 }

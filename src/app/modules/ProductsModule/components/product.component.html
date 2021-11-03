@@ -23,8 +23,9 @@
 </mat-menu>
 
 <mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-      <p>selected products</p>
+    <mat-drawer 
+    #drawer class="example-sidenav" mode="side">
+      <app-product-cart></app-product-cart>
       <div *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</div>
       <button (click)="showFiller = !showFiller" color="primary" mat-raised-button>
         Toggle extra products
