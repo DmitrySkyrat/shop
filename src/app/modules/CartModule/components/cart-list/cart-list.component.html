@@ -8,8 +8,8 @@
         </div>
     </div>
 
-    <div class="cart-items" *ngIf="selectedProducts; else empty">
-        <ng-container *ngFor="let selectedProduct of selectedProducts |async; trackBy: trackByItems">
+    <div class="cart-items" *ngIf="selectedProducts$; else empty">
+        <ng-container *ngFor="let selectedProduct of selectedProducts$ | async; trackBy: trackByItems">
             <app-cart-item
              [product]="selectedProduct"
              (delete)="onDelete($event)"

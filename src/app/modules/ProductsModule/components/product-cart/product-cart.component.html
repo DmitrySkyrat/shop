@@ -1,0 +1,10 @@
+<div
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()"
+>
+    <div *ngFor="let product of cartProducts$ | async">
+        {{'Hello'}}
+    </div>
+</div>
