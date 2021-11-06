@@ -1,8 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { OrderByPipe } from "../../SharedModule/pipes/order-by.pipe";
-import { ProductsService } from "../services/products.service";
 import { ProductListComponent } from "./product-list/product-list.component";
-import { map } from "rxjs/operators";
 import { AppSettingsService } from "../../CoreModule/services/app-settings.service";
 
 @Component({

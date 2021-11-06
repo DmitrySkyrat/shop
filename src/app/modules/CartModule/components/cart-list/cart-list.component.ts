@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from 'src/app/modules/CoreModule/store/app.state';
+import { CartState } from 'src/app/modules/CoreModule/store/cart/cart.state';
 import { CartProductModel } from '../../models/cart.model';
-import { CartService } from '../../services/cart.service';
+import * as CartActions from "../../../CoreModule/store/cart/cart.action";
+import { selectCartSum, selectCartTotal } from 'src/app/modules/CoreModule/store/cart/cart.selector';
 
 @Component({
   selector: 'app-cart-list',
@@ -10,15 +14,20 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./cart-list.component.scss']
 })
 export class CartListComponent implements OnInit {
-  selectedProducts$: Observable<CartProductModel[]> = of([]);
-  rezultProductsSum!: Observable<number>;
-  rezultProductsCount!: Observable<number>;
-  constructor(private cartService: CartService, private router: Router) {}
+  rezultProductsSum$!: Observable<number>;
+  rezultProductsCount$!: Observable<number>;
+  cartState$!: Observable<CartState>;
+  constructor(
+    private router: Router,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
-    this.selectedProducts$ = this.cartService.selectedProducts$;
-    this.rezultProductsSum = this.cartService.getProductsSum();
-    this.rezultProductsCount = this.cartService.getProductsCount();
+    this.cartState$ = this.store.select('cartProducts');
+    this.store.dispatch(CartActions.getProductsSum());
+    this.store.dispatch(CartActions.getProductsCount());
+    this.rezultProductsSum$ = this.store.select(selectCartSum);
+    this.rezultProductsCount$ = this.store.select(selectCartTotal);
   }
 
   trackByItems(index: number, selectedProduct: CartProductModel) {
@@ -29,15 +38,7 @@ export class CartListComponent implements OnInit {
     this.router.navigate(['cart', 'order']);
   }
 
-  onDelete(product: CartProductModel) {
-    this.cartService.deleteCartProduct(product);
-  }
-
-  setCountToProduct(product: CartProductModel) {
-    this.cartService.setCountToProduct(product);
-  }
-
   onCleanProducts() {
-    this.cartService.removeAllProducts();
+    this.store.dispatch(CartActions.deleteProducts());
   }
 }

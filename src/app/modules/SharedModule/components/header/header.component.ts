@@ -1,5 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CartService } from 'src/app/modules/CartModule/services/cart.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from 'src/app/modules/CoreModule/store/app.state';
+import { selectCartSum, selectCartTotal } from 'src/app/modules/CoreModule/store/cart/cart.selector';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +11,13 @@ import { CartService } from 'src/app/modules/CartModule/services/cart.service';
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
   @ViewChild('appTitle') title!: ElementRef;
-  constructor(public cartService: CartService) {}
+  rezultProductsSum$!: Observable<number>;
+  rezultProductsCount$!: Observable<number>;
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    ;
+    this.rezultProductsSum$ = this.store.select(selectCartSum);
+    this.rezultProductsCount$ = this.store.select(selectCartTotal);
   }
 
   ngAfterViewInit(): void {

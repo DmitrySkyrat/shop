@@ -4,7 +4,7 @@
     [infiniteScrollThrottle]="50"
     (scrolled)="onScroll()"
 >
-    <div *ngFor="let product of cartProducts$ | async">
+    <div *ngFor="let product of (cartProducts$ | async)?.data">
         {{'Hello'}}
     </div>
 </div>

@@ -8,12 +8,11 @@
         </div>
     </div>
 
-    <div class="cart-items" *ngIf="selectedProducts$; else empty">
-        <ng-container *ngFor="let selectedProduct of selectedProducts$ | async; trackBy: trackByItems">
+    <div class="cart-items" *ngIf="cartState$; else empty">
+        <ng-container *ngFor="let selectedProduct of (cartState$ | async)?.data; trackBy: trackByItems">
             <app-cart-item
              [product]="selectedProduct"
-             (delete)="onDelete($event)"
-             (setCountToProduct)="setCountToProduct($event)">
+            >
             </app-cart-item>
         </ng-container>
     </div>
@@ -21,10 +20,10 @@
     <div class="cart-order">
         <div class="cart-order__result">
             <div class="cart-order__amount">
-                <span>Amount:</span><span> {{this.rezultProductsCount | async}} pc.</span>
+                <span>Amount:</span><span> {{this.rezultProductsCount$ | async}} pc.</span>
             </div>
             <div class="cart-order__total">
-                <span>Total:</span><span> {{this.rezultProductsSum | async}} BYN</span>
+                <span>Total:</span><span> {{this.rezultProductsSum$ | async}} BYN</span>
             </div>
         </div>
         <div class="cart-order__buttons">

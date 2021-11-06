@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TimingInterceptor } from './modules/CoreModule/interceptors/timing.interceptor';
 import { CoreModule } from './modules/CoreModule/core.module';
+import { RootStoreModule } from './modules/CoreModule/store/root-store.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CoreModule } from './modules/CoreModule/core.module';
     BrowserAnimationsModule,
     CoreModule,
     HttpClientModule,
+    RootStoreModule,
     AppRoutingModule,
   ],
   providers: [

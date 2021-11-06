@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { CartService } from 'src/app/modules/CartModule/services/cart.service';
 import { PizzaDescriptionData } from 'src/app/modules/CoreModule/models/config.model';
 import { pizzaDescriptions } from 'src/app/modules/CoreModule/services/constant.service';
 import { ProductModel } from '../../models/product.model';
+import * as CartActions from "../../../CoreModule/store/cart/cart.action";
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/modules/CoreModule/store/app.state';
 @Component({
   selector: 'app-product-view',
   templateUrl: './product-view.component.html',
@@ -18,15 +20,15 @@ export class ProductViewComponent {
   cardCount: number = 0;
 
   constructor(
-    private cartService: CartService,
     public dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<AppState>
     ) {}
 
   onAdd(card: ProductModel): void {
     this.cardCount++;
-    this.cartService.addCartProduct({
+    this.store.dispatch(CartActions.addProductToCart({product: {
       name: card.name,
       size: this.selectedProductSize,
       imgUrl: card.imgUrl,
@@ -34,7 +36,9 @@ export class ProductViewComponent {
       category: this.selectedProductCategory,
       isAvaliable: card.isAvaliable,
       count: this.cardCount
-    });
+    }}));
+    this.store.dispatch(CartActions.getProductsSum());
+    this.store.dispatch(CartActions.getProductsCount());
   }
 
   selectProductCategory(event: any): void {
