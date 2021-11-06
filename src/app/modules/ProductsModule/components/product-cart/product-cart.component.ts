@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { CartProductModel } from 'src/app/modules/CartModule/models/cart.model';
-import { CartService } from 'src/app/modules/CartModule/services/cart.service';
+import { AppState } from 'src/app/modules/CoreModule/store/app.state';
+import { selectCartState } from 'src/app/modules/CoreModule/store/cart/cart.selector';
+import { CartState } from 'src/app/modules/CoreModule/store/cart/cart.state';
 
 @Component({
   selector: 'app-product-cart',
   templateUrl: './product-cart.component.html',
   styleUrls: ['./product-cart.component.scss']
 })
-export class ProductCartComponent implements OnInit {
-  cartProducts$!: Observable<CartProductModel[]>;
+export class ProductCartComponent {
+  cartProducts$!: Observable<CartState>;
 
-  constructor(private cartService: CartService) {
-    this.cartProducts$ = this.cartService.selectedProducts$;
-  }
-
-  ngOnInit(): void {
-
+  constructor(private store: Store<AppState>) {
+    this.cartProducts$ = this.store.select(selectCartState);
   }
 
   onScroll() {

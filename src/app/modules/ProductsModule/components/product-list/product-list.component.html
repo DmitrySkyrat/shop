@@ -1,3 +1,8 @@
-<ng-container *ngIf="cards$">
-    <app-product-view appHighlightDirective class="view" *ngFor="let card of cards$ | async" [card]="card"></app-product-view>
+<ng-container *ngIf="productsState$">
+    <app-product-view
+        appHighlightDirective 
+        class="view" 
+        *ngFor="let card of (productsState$ | async)?.data" 
+        [card]="card">
+    </app-product-view>
 </ng-container>

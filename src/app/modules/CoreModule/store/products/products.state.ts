@@ -1,12 +1,11 @@
-import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { ECategoryType, ESizeType, ProductModel } from "../models/product.model";
+import { ECategoryType, ESizeType, ProductModel } from "src/app/modules/ProductsModule/models/product.model";
 
-@Injectable({
-    providedIn: 'root'
-})
-export class ProductsService {
-    products: ProductModel[] = [
+export interface ProductsState {
+    data: ReadonlyArray<ProductModel>
+}
+
+export const initialProductsState: ProductsState = {
+    data: [
         {
             name: 'Cheeseburger Pizza', imgUrl: 'assets/cheeseburgerPizza.png', size: { small: ESizeType.Small, medium: ESizeType.Medium, big: ESizeType.Big }, price: 15.99,
             category: { traditional: ECategoryType.Traditional, thin: ECategoryType.Thin, cheeseBoard: ECategoryType.CheeseBoard }, isAvaliable: false, count: 0
@@ -24,8 +23,4 @@ export class ProductsService {
             category: { traditional: ECategoryType.Traditional, thin: ECategoryType.Thin, cheeseBoard: ECategoryType.CheeseBoard }, isAvaliable: true, count: 0
         }
     ]
-
-    getProducts(): Observable<ProductModel[]> {
-        return of(this.products);
-    }
 }

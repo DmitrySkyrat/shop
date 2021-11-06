@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/modules/CoreModule/store/app.state';
 import { CartProductModel } from '../../models/cart.model';
-
+import * as CartActions from "../../../CoreModule/store/cart/cart.action";
 @Component({
   selector: 'app-cart-item',
   templateUrl: './cart-item.component.html',
@@ -9,21 +11,24 @@ import { CartProductModel } from '../../models/cart.model';
 })
 export class CartItemComponent {
   @Input() product!: CartProductModel;
-  @Output() delete: EventEmitter<CartProductModel> = new EventEmitter<CartProductModel>();
-  @Output() setCountToProduct: EventEmitter<CartProductModel> = new EventEmitter<CartProductModel>();
-  constructor() {}
+  constructor(private store: Store<AppState>) {
+  }
 
   onDelete(product: CartProductModel): void {
-    this.delete.emit(product);
+    this.store.dispatch(CartActions.deleteProduct({ product }));
   }
 
   increaseCount(product: CartProductModel) {
-    product.count = product.count as number + 1;
-    this.setCountToProduct.emit(product);
+    let newProduct = { ...product, count: (product.count as number) + 1 };
+    this.store.dispatch(CartActions.setCountToProduct({ product: newProduct }));
+    this.store.dispatch(CartActions.getProductsSum());
+    this.store.dispatch(CartActions.getProductsCount());
   }
 
   decreaseCount(product: CartProductModel) {
-    product.count = product.count as number - 1;
-    this.setCountToProduct.emit(product);
+    let newProduct = { ...product, count: (product.count as number) - 1 };
+    this.store.dispatch(CartActions.setCountToProduct({ product: newProduct }));
+    this.store.dispatch(CartActions.getProductsSum());
+    this.store.dispatch(CartActions.getProductsCount());
   }
 }
