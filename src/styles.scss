@@ -13,4 +13,8 @@ body {
   max-width: 1600px;
   min-height: 100vh;
   font-family: "Roboto", "Helvetica Neue", sans-serif;
+
+  .cdk-overlay-pane {
+    min-width: 70vw;
+  }
 }
