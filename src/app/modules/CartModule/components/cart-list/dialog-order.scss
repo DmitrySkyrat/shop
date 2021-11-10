@@ -1,0 +1,39 @@
+.dialog-title {
+    text-align: center;
+}
+
+.order-form{
+    display: flex;
+    flex-direction: column;
+
+    .send-products-toggle {
+        margin-bottom: 19px;
+    }
+
+    .phone-block {
+        display: flex;
+
+        mat-form-field {
+            width: 100%;
+        }
+    }
+
+    .phone-btn {
+        background-color: #FE5F1E;
+        color: #FFFFFF;
+        margin-bottom: 19px;
+    }
+
+    .submit, .delete {
+        background-color: #FE5F1E;
+        color: #FFFFFF;
+    }
+
+    .delete {
+        margin-left: 10px;
+    }
+
+    .error-message{
+        color: red;
+    }
+}

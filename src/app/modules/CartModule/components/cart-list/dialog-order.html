@@ -1,0 +1,63 @@
+<h2 class="dialog-title" mat-dialog-title>Process order</h2>
+
+<mat-dialog-content class="mat-typography">
+  <h3>Develop across all platforms</h3>
+  <p>Delivery within 30 minutes</p>
+
+  <form [formGroup]="dialogForm" class="order-form">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" customFirstNameValidator (blur)="onBlur($event)">
+    </mat-form-field>
+    <span class="error-message" *ngIf="validationMessages.get('firstName').message">
+      {{validationMessages.get('firstName').message}}
+    </span>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" appAsyncEmailValidator (blur)="onBlur($event)">
+    </mat-form-field>
+    <span class="error-message" *ngIf="validationMessages.get('email').message">
+      {{validationMessages.get('email').message}}
+    </span>
+
+    <div formArrayName="phones">
+      <div class="phone-block" *ngFor="let phone of phones.controls; let i = index">
+        <mat-form-field appearance="fill">
+          <mat-label>Phone</mat-label>
+          <input matInput [formControlName]="i" id="{{'phoneId' + i}}">
+        </mat-form-field>
+        <button class="delete" mat-fab (click)="onRemoveButton(i)" *ngIf="i > 0">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <button class="phone-btn" mat-raised-button type="button" (click)="onAddPhone()">
+      Add additional phone
+    </button>
+
+    <mat-checkbox
+      formControlName="sendProducts"
+      class="send-products-toggle"
+      color="primary">Send me your products
+    </mat-checkbox>
+
+    <mat-form-field *ngIf="sendProducts.value" appearance="fill">
+      <mat-label>Address</mat-label>
+      <textarea matInput formControlName="address"></textarea>
+    </mat-form-field>
+
+    <button class="submit" mat-raised-button type="submit" (click)="submit()">SUBMIT</button>
+  </form>
+  <br>Value: {{ dialogForm.valid | json }}
+</mat-dialog-content>
+
+<mat-dialog-actions align="start">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>
