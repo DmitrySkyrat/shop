@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatDialog } from '@angular/material/dialog';
+import { provideMockStore } from '@ngrx/store/testing';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CartListComponent } from './cart-list.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 describe('CartListComponent', () => {
   let component: CartListComponent;
@@ -8,7 +11,12 @@ describe('CartListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CartListComponent ]
+      imports: [OverlayModule, MatDialogModule],
+      declarations: [ CartListComponent ],
+      providers: [
+        provideMockStore(),
+        {provide: MatDialog, useVlaue: {open: () => {}}},
+      ]
     })
     .compileComponents();
   });
